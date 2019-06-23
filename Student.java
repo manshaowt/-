@@ -1,69 +1,54 @@
-package com.container.treeset;
+package com.container.map.second;
 
-import java.util.*;
+public class Student {
+    private String name;  // 姓名
+    private int age;  // 年龄
 
-public class Student implements Comparable {
-    private String stuId;  // 学号
-    private String stuName;  // 姓名
-    private int totalScore;  // 总分
-
-    public String getStuId() {
-        return stuId;
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
     }
 
-    public String getStuName() {
-        return stuName;
+    public String getName() {
+        return name;
     }
 
-    public int getTotalScore() {
-        return totalScore;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setStuId(String stuId) {
-        this.stuId = stuId;
+    public int getAge() {
+        return age;
     }
 
-    public void setStuName(String stuName) {
-        this.stuName = stuName;
-    }
-
-    public void setTotalScore(int totalScore) {
-        this.totalScore = totalScore;
-    }
-
-    public Student(String stuId, String stuName, int totalScore) {
-        this.stuId = stuId;
-        this.stuName = stuName;
-        this.totalScore = totalScore;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override
     public String toString() {
-        return "学号: " + this.stuId + ", 姓名: " + this.stuName + ", 总分: " + this.totalScore;
+        return "Name: " + this.name + ", Age: " + this.age;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Student))
+        if (!(o instanceof com.container.map.second.Student))
             return false;
 
         Student s = (Student) o;
 
-        if (this.stuId.equals(s.stuId))
+        if ((this.name.equals(s.name)) && (this.age == s.age))
             return true;
         else
             return false;
     }
 
     @Override
-    public int compareTo(Object o) {
-        Student s = (Student) o;
+    public int hashCode() {
+        int result;
 
-        int result = this.totalScore > s.totalScore ? 1 : (this.totalScore == s.totalScore ? 0 : -1);
-        result = -result;  // 因为是降序
-
-        if (0 == result)
-            result = this.stuName.compareTo(s.stuName); // compareTo比较对象
+        result = (this.name == null ? 0 : this.name.hashCode());
+        result += this.age;
 
         return result;
     }
